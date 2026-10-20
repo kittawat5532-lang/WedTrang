@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="th" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เที่ยวตรัง - มนต์เสน่ห์แห่งทะเลอันดามัน (Cute Edition 💖)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- ใช้ฟอนต์ Mali แนวลายมือน่ารักๆ -->
+    <link href="https://fonts.googleapis.com/css2?family=Mali:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Mali', 'cursive'],
+                    },
+                    colors: {
+                        pastel: {
+                            pink: '#ffb3c6',
+                            blue: '#a9def9',
+                            yellow: '#fcf6bd',
+                            green: '#d0f4de',
+                            purple: '#e4c1f9',
+                            bg: '#fff0f3',
+                            text: '#5d576b'
+                        }
+                    },
+                    animation: {
+                        'float': 'float 3s ease-in-out infinite',
+                        'float-delayed': 'float 4s ease-in-out 1s infinite',
+                        'wiggle': 'wiggle 1s ease-in-out infinite',
+                        'bounce-soft': 'bounce-soft 2s infinite',
+                        'blob': 'blob 7s infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        wiggle: {
+                            '0%, 100%': { transform: 'rotate(-3deg)' },
+                            '50%': { transform: 'rotate(3deg)' },
+                        },
+                        'bounce-soft': {
+                            '0%, 100%': { transform: 'translateY(0)', animationTimingFunction: 'cubic-bezier(0.8,0,1,1)' },
+                            '50%': { transform: 'translateY(-25%)', animationTimingFunction: 'cubic-bezier(0,0,0.2,1)' },
+                        },
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #fff0f3;
+            background-image: 
+                radial-gradient(circle at 100% 150%, #fcf6bd 24%, white 24%, white 28%, #fcf6bd 28%, #fcf6bd 36%, white 36%, white 40%, transparent 40%, transparent),
+                radial-gradient(circle at 0 150%, #fcf6bd 24%, white 24%, white 28%, #fcf6bd 28%, #fcf6bd 36%, white 36%, white 40%, transparent 40%, transparent);
+            background-size: 100px 100px;
+            background-attachment: fixed;
+            color: #5d576b;
+        }
+
+        .hero-bg {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #a9def9 0%, #ffb3c6 100%);
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .fade-in.appear {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .cute-shadow {
+            box-shadow: 0 10px 25px -5px rgba(255, 179, 198, 0.5), 0 8px 10px -6px rgba(255, 179, 198, 0.3);
+        }
+
+        .card-hover:hover {
+            transform: translateY(-10px) rotate(1deg);
+        }
+        
+        /* ขอบมนๆ แบบฟองสบู่ */
+        .bubble-border {
+            border-radius: 40px 10px 40px 10px;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 transition-all duration-500 bg-white/80 backdrop-blur-lg border-b-4 border-pastel-pink shadow-sm" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center cursor-pointer group" onclick="window.scrollTo(0,0)">
+                    <div class="w-10 h-10 bg-pastel-blue rounded-full flex items-center justify-center mr-3 group-hover:animate-wiggle border-2 border-white shadow-md">
+                        <i class="fa-solid fa-fish text-white text-xl"></i>
+                    </div>
+                    <span class="font-bold text-2xl text-pastel-text">Trang<span class="text-pastel-pink">Travel</span> 🏝️</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#about" class="text-pastel-text hover:text-pastel-pink font-bold text-lg transition hover:animate-wiggle">🌊 รู้จักเมืองตรัง</a>
+                    <a href="#destinations" class="text-pastel-text hover:text-pastel-pink font-bold text-lg transition hover:animate-wiggle">📸 ที่เที่ยวห้ามพลาด</a>
+                    <a href="#food" class="text-pastel-text hover:text-pastel-pink font-bold text-lg transition hover:animate-wiggle">🥟 ของอร่อย</a>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-pastel-pink hover:text-pastel-blue focus:outline-none bg-white p-2 rounded-full shadow-sm">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white/95 border-b-4 border-pastel-pink">
+            <div class="px-4 pt-2 pb-4 space-y-2 text-center">
+                <a href="#about" class="block px-3 py-3 rounded-2xl text-lg font-bold text-pastel-text hover:text-pastel-pink hover:bg-pastel-bg bg-white shadow-sm">🌊 รู้จักเมืองตรัง</a>
+                <a href="#destinations" class="block px-3 py-3 rounded-2xl text-lg font-bold text-pastel-text hover:text-pastel-pink hover:bg-pastel-bg bg-white shadow-sm">📸 ที่เที่ยวห้ามพลาด</a>
+                <a href="#food" class="block px-3 py-3 rounded-2xl text-lg font-bold text-pastel-text hover:text-pastel-pink hover:bg-pastel-bg bg-white shadow-sm">🥟 ของอร่อย</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-bg min-h-screen flex items-center justify-center text-center px-4 relative pb-20 pt-24">
+        <!-- Decorative Background Blobs -->
+        <div class="absolute top-0 -left-4 w-72 h-72 bg-pastel-yellow rounded-full mix-blend-multiply filter blur-2xl opacity-70 animate-blob"></div>
+        <div class="absolute top-0 -right-4 w-72 h-72 bg-pastel-purple rounded-full mix-blend-multiply filter blur-2xl opacity-70 animate-blob animation-delay-2000"></div>
+        <div class="absolute -bottom-8 left-20 w-72 h-72 bg-pastel-pink rounded-full mix-blend-multiply filter blur-2xl opacity-70 animate-blob animation-delay-4000"></div>
+
+        <div class="max-w-4xl mx-auto z-10 fade-in bg-white/40 p-10 rounded-[3rem] border-4 border-white backdrop-blur-sm shadow-xl">
+            <!-- น้องพะยูนมาสคอต (SVG) -->
+            <div class="flex justify-center mb-6">
+                <svg viewBox="0 0 200 150" class="w-40 h-40 animate-float drop-shadow-xl" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Body -->
+                    <path d="M 40 75 C 40 30, 160 30, 160 75 C 160 120, 40 120, 40 75 Z" fill="#a9def9"/>
+                    <!-- Tail -->
+                    <path d="M 150 75 C 175 50, 195 65, 180 75 C 195 85, 175 100, 150 75 Z" fill="#a9def9"/>
+                    <!-- Flipper Left -->
+                    <path d="M 75 90 C 65 115, 90 125, 100 100 Z" fill="#88cbed"/>
+                    <!-- Flipper Right (Back) -->
+                    <path d="M 110 90 C 100 115, 125 125, 135 100 Z" fill="#7bc4ea"/>
+                    <!-- Blush -->
+                    <circle cx="65" cy="75" r="7" fill="#ffb3c6" opacity="0.8"/>
+                    <circle cx="115" cy="75" r="7" fill="#ffb3c6" opacity="0.8"/>
+                    <!-- Eyes -->
+                    <circle cx="60" cy="65" r="5" fill="#5d576b"/>
+                    <circle cx="120" cy="65" r="5" fill="#5d576b"/>
+                    <!-- Sparkle in eyes -->
+                    <circle cx="58" cy="63" r="2" fill="white"/>
+                    <circle cx="118" cy="63" r="2" fill="white"/>
+                    <!-- Smile -->
+                    <path d="M 80 80 Q 90 90 100 80" fill="none" stroke="#5d576b" stroke-width="3" stroke-linecap="round"/>
+                    <!-- Flower on head -->
+                    <path d="M 45 45 C 50 35, 60 45, 55 55 C 45 60, 35 50, 45 45 Z" fill="#ffb3c6"/>
+                    <circle cx="50" cy="50" r="4" fill="#fcf6bd"/>
+                </svg>
+            </div>
+
+            <h1 class="text-4xl md:text-6xl font-bold text-pastel-text mb-4 leading-tight">
+                ตะลุยเมืองตรัง <br/> <span class="text-pastel-pink bg-white px-4 py-2 rounded-3xl inline-block mt-2 shadow-sm transform -rotate-2">ฉบับน่ารักปุ๊กปิ๊ก ✨</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-slate-700 mb-8 font-medium">
+                "ทะเลใสปิ๊ง ของกินอร่อยเว่อร์ มาเจอพะยูนกันเถอะ!"
+            </p>
+            <a href="#destinations" class="inline-block bg-pastel-pink hover:bg-pink-400 text-white font-bold text-xl py-4 px-10 rounded-full cute-shadow transition-transform transform hover:scale-110 hover:rotate-2 border-4 border-white">
+                ไปเที่ยวกันเลย! 🚀
+            </a>
+        </div>
+        
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce-soft">
+            <a href="#about" class="text-white hover:text-pastel-yellow transition bg-pastel-blue/80 p-3 rounded-full border-2 border-white shadow-md">
+                <i class="fa-solid fa-arrow-down text-2xl"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16 fade-in">
+                <div class="inline-block bg-white px-8 py-3 rounded-full border-4 border-pastel-blue shadow-md mb-4">
+                    <h2 class="text-3xl md:text-4xl font-bold text-pastel-text">ทำไมต้องมา <span class="text-pastel-blue">ตรัง</span> ? 🧐</h2>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <!-- Card 1 -->
+                <div class="text-center fade-in bg-white p-8 bubble-border shadow-xl hover:shadow-2xl transition-all card-hover border-4 border-pastel-blue relative">
+                    <div class="absolute -top-8 left-1/2 transform -translate-x-1/2">
+                        <div class="w-16 h-16 bg-pastel-blue text-white rounded-full flex items-center justify-center text-3xl border-4 border-white shadow-md animate-float">
+                            🌊
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 mt-6 text-pastel-text">ทะเลสวยตะโกน</h3>
+                    <p class="text-slate-600 text-lg">หาดทรายขาวนุ่มฟู น้ำทะเลใสแจ๋วราวกับกระจก จะดำน้ำหรือนอนโง่ๆ ริมหาดก็ฟินสุดๆ</p>
+                </div>
+                
+                <!-- Card 2 -->
+                <div class="text-center fade-in bg-white p-8 bubble-border shadow-xl hover:shadow-2xl transition-all card-hover border-4 border-pastel-green relative mt-10 md:mt-0">
+                    <div class="absolute -top-8 left-1/2 transform -translate-x-1/2">
+                        <div class="w-16 h-16 bg-pastel-green text-white rounded-full flex items-center justify-center text-3xl border-4 border-white shadow-md animate-float-delayed">
+                            🌴
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 mt-6 text-pastel-text">ธรรมชาติร่มรื่น</h3>
+                    <p class="text-slate-600 text-lg">มีทั้งถ้ำลึกลับ น้ำตกเย็นฉ่ำ และภูเขาเขียวขจี ให้สูดโอโซนได้เต็มปอดเลยจ้า</p>
+                </div>
+                
+                <!-- Card 3 -->
+                <div class="text-center fade-in bg-white p-8 bubble-border shadow-xl hover:shadow-2xl transition-all card-hover border-4 border-pastel-yellow relative mt-10 md:mt-0">
+                    <div class="absolute -top-8 left-1/2 transform -translate-x-1/2">
+                        <div class="w-16 h-16 bg-pastel-yellow text-pastel-text rounded-full flex items-center justify-center text-3xl border-4 border-white shadow-md animate-float">
+                            😋
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 mt-6 text-pastel-text">สวรรค์คนชอบหิว</h3>
+                    <p class="text-slate-600 text-lg">หมูย่างหนังกรอบฟินๆ ติ่มซำร้อนๆ กินได้ตั้งแต่เช้ายันค่ำ เตรียมพุงขยายได้เลย!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Destinations Section -->
+    <section id="destinations" class="py-24 bg-pastel-blue/20 border-y-8 border-white border-dashed relative">
+        <!-- ปลาดาวลอยๆ -->
+        <div class="absolute top-10 right-10 text-4xl animate-wiggle">⭐</div>
+        <div class="absolute bottom-20 left-10 text-4xl animate-wiggle" style="animation-delay: 0.5s;">🐚</div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl font-bold text-pastel-text mb-4 bg-white inline-block px-8 py-4 rounded-[3rem] border-4 border-pastel-pink shadow-lg transform rotate-1">
+                    📍 ที่เที่ยวไฮไลท์ ปังๆ
+                </h2>
+                <p class="text-slate-600 text-xl mt-4 font-medium">รวมพิกัดถ่ายรูปสวย รูปลงโซเชียลเพื่อนต้องทักชัวร์!</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                
+                <!-- Destination Card 1 -->
+                <div class="bg-white rounded-[2rem] overflow-hidden shadow-xl card-hover border-4 border-white group fade-in relative">
+                    <!-- สติกเกอร์ -->
+                    <div class="absolute -top-3 -right-3 z-10 bg-pastel-yellow text-pastel-text font-bold px-4 py-2 rounded-full border-2 border-white shadow-md transform rotate-12">
+                        Hot! 🔥
+                    </div>
+                    <div class="relative overflow-hidden h-60 m-2 rounded-3xl">
+                        <img src="https://www.eatchillwander.com/wp-content/uploads/2021/04/koh-kradan-island-trang-thailand.jpg" alt="เกาะกระดาน" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-700 cursor-pointer lightbox-img">
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="text-2xl font-bold text-pastel-pink mb-2">เกาะกระดาน</h3>
+                        <p class="text-slate-600 text-sm mb-4">หาดทรายขาวจั๊วะ น้ำใสปิ๊งระดับ 4K! ดำน้ำดูปลาการ์ตูนเพลินมาก โรแมนติกสุดๆ</p>
+                        <span class="bg-pastel-bg text-pastel-text px-4 py-1 rounded-full text-sm font-bold border-2 border-pastel-pink">อ.กันตัง</span>
+                    </div>
+                </div>
+
+                <!-- Destination Card 2 -->
+                <div class="bg-white rounded-[2rem] overflow-hidden shadow-xl card-hover border-4 border-white group fade-in">
+                    <div class="relative overflow-hidden h-60 m-2 rounded-3xl">
+                        <img src="https://cms.dmpcdn.com/travel/2022/04/01/ea2bfd20-b1ae-11ec-8344-391451c81fb4_webp_original.jpg" alt="ถ้ำมรกต" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-700 cursor-pointer lightbox-img">
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="text-2xl font-bold text-pastel-blue mb-2">ถ้ำมรกต</h3>
+                        <p class="text-slate-600 text-sm mb-4">ตื่นเต้นเว่อร์! ต้องว่ายน้ำลอยคอเข้าถ้ำมืดๆ ทะลุมาเจอหาดลับสีมรกต เหมือนหลุดไปอีกโลก</p>
+                        <span class="bg-pastel-bg text-pastel-text px-4 py-1 rounded-full text-sm font-bold border-2 border-pastel-blue">เกาะมุก</span>
+                    </div>
+                </div>
+
+                <!-- Destination Card 3 -->
+                <div class="bg-white rounded-[2rem] overflow-hidden shadow-xl card-hover border-4 border-white group fade-in">
+                    <div class="relative overflow-hidden h-60 m-2 rounded-3xl">
+                        <img src="https://ak-d.tripcdn.com/images/1mi4t224x9akimwt8C1AF_Q90.jpg?proc=source/trip" alt="สถานีรถไฟกันตัง" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-700 cursor-pointer lightbox-img">
+                    </div>
+                    <div class="p-6 text-center">
+                        <h3 class="text-2xl font-bold text-pastel-yellow mb-2">สถานีรถไฟกันตัง</h3>
+                        <p class="text-slate-600 text-sm mb-4">สถานีรถไฟสีเหลืองมัสตาร์ดสุดคลาสสิก ถ่ายรูปแนววินเทจได้เก๋ๆ ยอดไลก์พุ่งแน่นอน</p>
+                        <span class="bg-pastel-bg text-pastel-text px-4 py-1 rounded-full text-sm font-bold border-2 border-pastel-yellow">อ.กันตัง</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Food Section -->
+    <section id="food" class="py-24 bg-white relative">
+        <!-- SVG น้องปู -->
+        <div class="absolute top-10 left-10 w-24 h-24 animate-wiggle hidden md:block">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="30" fill="#ffb3c6"/>
+                <circle cx="35" cy="40" r="5" fill="#5d576b"/>
+                <circle cx="65" cy="40" r="5" fill="#5d576b"/>
+                <path d="M 45 55 Q 50 65 55 55" fill="none" stroke="#5d576b" stroke-width="3" stroke-linecap="round"/>
+                <!-- Claws -->
+                <path d="M 20 50 Q 10 30 20 20 Q 30 30 20 50" fill="#ffb3c6"/>
+                <path d="M 80 50 Q 90 30 80 20 Q 70 30 80 50" fill="#ffb3c6"/>
+            </svg>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                
+                <div class="w-full lg:w-1/2 fade-in relative">
+                    <div class="absolute -inset-4 bg-pastel-pink/20 rounded-[3rem] transform -rotate-3 z-0"></div>
+                    <div class="grid grid-cols-2 gap-4 relative z-10">
+                        <img src="https://images.unsplash.com/photo-1563245372-f21724e3856d?q=80&w=2029&auto=format&fit=crop" alt="หมูย่าง" class="rounded-[2rem] border-4 border-white shadow-lg h-56 w-full object-cover mt-12 animate-float cursor-pointer lightbox-img">
+                        <img src="https://images.unsplash.com/photo-1496116218417-1a781b1c416c?q=80&w=2070&auto=format&fit=crop" alt="ติ่มซำ" class="rounded-[2rem] border-4 border-white shadow-lg h-56 w-full object-cover animate-float-delayed cursor-pointer lightbox-img">
+                    </div>
+                </div>
+                
+                <div class="w-full lg:w-1/2 fade-in">
+                    <h2 class="text-4xl md:text-5xl font-bold text-pastel-text mb-6 leading-tight">
+                        กองทัพต้องเดินด้วยท้อง <br>
+                        <span class="text-pastel-pink">มาตรังห้ามพลาดสิ่งนี้! 🍽️</span>
+                    </h2>
+                    <p class="text-slate-600 mb-8 text-lg bg-pastel-yellow/30 p-4 rounded-2xl border-2 border-pastel-yellow inline-block">
+                        คนที่นี่เขากินกันดุมาก! โดยเฉพาะมื้อเช้าคือจัดเต็มสุดๆ เตรียมท้องไว้ให้พร้อมเลย
+                    </p>
+                    
+                    <ul class="space-y-6">
+                        <li class="flex items-start bg-white p-4 rounded-2xl shadow-sm hover:shadow-md transition border-2 border-transparent hover:border-pastel-pink">
+                            <div class="flex-shrink-0 w-14 h-14 bg-pastel-pink text-white rounded-full flex items-center justify-center text-2xl shadow-inner transform rotate-12">
+                                🐷
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-xl font-bold text-pastel-text">หมูย่างเมืองตรัง</h4>
+                                <p class="text-slate-600 mt-1">ทีเด็ดคือหนังกรอบๆ เนื้อหวานฉ่ำ หอมกลิ่นเครื่องเทศยาจีน ยิ่งกินคู่กับกาแฟตอนเช้าคือเดอะเบสท์!</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start bg-white p-4 rounded-2xl shadow-sm hover:shadow-md transition border-2 border-transparent hover:border-pastel-blue">
+                            <div class="flex-shrink-0 w-14 h-14 bg-pastel-blue text-white rounded-full flex items-center justify-center text-2xl shadow-inner transform -rotate-12">
+                                🥟
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-xl font-bold text-pastel-text">ติ่มซำ (เตี้ยมซิ่ม)</h4>
+                                <p class="text-slate-600 mt-1">นึ่งกันสดๆ ร้อนๆ เลือกกันจนตาลาย ทีเด็ดคือน้ำจิ้มส้มเจื้องสีแดงเปรี้ยวหวาน มีแค่ที่ตรังนะขอบอก</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start bg-white p-4 rounded-2xl shadow-sm hover:shadow-md transition border-2 border-transparent hover:border-pastel-yellow">
+                            <div class="flex-shrink-0 w-14 h-14 bg-pastel-yellow text-pastel-text rounded-full flex items-center justify-center text-2xl shadow-inner transform rotate-12">
+                                🍰
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="text-xl font-bold text-pastel-text">เค้กมีรูเมืองตรัง</h4>
+                                <p class="text-slate-600 mt-1">เค้กนุ่มฟูละมุนลิ้น ไม่ต้องมีครีมก็อร่อย ซื้อไปเป็นของฝาก ใครได้รับก็แฮปปี้</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white pt-16 pb-8 border-t-8 border-pastel-pink relative overflow-hidden">
+        <!-- Wavy Top Decoration -->
+        <div class="absolute top-0 left-0 w-full overflow-hidden leading-none" style="transform: translateY(-90%);">
+            <svg class="relative block w-full h-12" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118.08,130.83,119.3,200.7,112.5,242.49,108.43,283.47,88.4,321.39,56.44Z" fill="#ffb3c6"></path>
+            </svg>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <!-- น้องพะยูนบอกลา -->
+            <div class="flex justify-center mb-6">
+                <div class="w-20 h-20 bg-pastel-blue rounded-full border-4 border-white shadow-md flex items-center justify-center animate-bounce-soft">
+                    <span class="text-4xl">🐋</span>
+                </div>
+            </div>
+            
+            <h3 class="font-bold text-3xl text-pastel-text mb-2">Trang<span class="text-pastel-pink">Travel</span></h3>
+            <p class="text-lg text-slate-500 mb-8 font-medium">แล้วมาเที่ยวตรังด้วยกันน้าาา รออยู่ๆ 💕</p>
+            
+            <div class="flex justify-center space-x-6 mb-8">
+                <a href="#" class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-pastel-pink hover:text-white hover:bg-pastel-pink hover:scale-110 transition shadow-md border-2 border-pastel-pink">
+                    <i class="fa-brands fa-facebook-f text-xl"></i>
+                </a>
+                <a href="#" class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-pastel-blue hover:text-white hover:bg-pastel-blue hover:scale-110 transition shadow-md border-2 border-pastel-blue">
+                    <i class="fa-brands fa-instagram text-xl"></i>
+                </a>
+                <a href="#" class="w-12 h-12 bg-white rounded-full flex items-center justify-center text-pastel-yellow hover:text-white hover:bg-pastel-yellow hover:scale-110 transition shadow-md border-2 border-pastel-yellow">
+                    <i class="fa-brands fa-tiktok text-xl"></i>
+                </a>
+            </div>
+            
+            <div class="border-t-2 border-dashed border-pastel-pink/50 mt-8 pt-8 text-sm text-slate-400 font-medium">
+                &copy; 2026 Trang Travel Cute Edition. Made with 💖 and 🥟
+            </div>
+        </div>
+    </footer>
+
+    <!-- Image Modal (Lightbox) -->
+    <div id="image-modal" class="fixed inset-0 z-[100] hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 transition-opacity duration-300">
+        <div class="relative max-w-5xl w-full max-h-[90vh] flex flex-col items-center justify-center">
+            <button id="close-modal" class="absolute -top-12 right-0 md:-right-12 text-white hover:text-pastel-pink text-5xl font-bold transition transform hover:scale-110 focus:outline-none">&times;</button>
+            <img id="modal-image" src="" alt="Enlarged view" class="max-w-full max-h-[85vh] object-contain rounded-2xl border-4 border-white shadow-2xl">
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // Mobile Menu Toggle
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+                // เพิ่มแอนิเมชันป๊อปอัพ
+                if(!menu.classList.contains('hidden')) {
+                    menu.classList.add('animate-bounce-soft');
+                    setTimeout(() => menu.classList.remove('animate-bounce-soft'), 500);
+                }
+            });
+
+            menu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    menu.classList.add('hidden');
+                });
+            });
+
+            // Scroll Animation
+            const faders = document.querySelectorAll('.fade-in');
+            
+            const appearOptions = {
+                threshold: 0.1,
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const appearOnScroll = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) return;
+                    entry.target.classList.add('appear');
+                    observer.unobserve(entry.target);
+                });
+            }, appearOptions);
+
+            faders.forEach(fader => {
+                appearOnScroll.observe(fader);
+            });
+
+            // Navbar Effect
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('shadow-md');
+                    navbar.classList.add('py-2');
+                } else {
+                    navbar.classList.remove('shadow-md');
+                    navbar.classList.remove('py-2');
+                }
+            });
+
+            // Lightbox functionality
+            const modal = document.getElementById('image-modal');
+            const modalImg = document.getElementById('modal-image');
+            const closeModal = document.getElementById('close-modal');
+            const lightboxImages = document.querySelectorAll('.lightbox-img');
+
+            const openModal = (src) => {
+                modalImg.src = src;
+                modal.classList.remove('hidden');
+                // Trigger reflow
+                void modal.offsetWidth;
+                modal.classList.remove('opacity-0');
+                modal.classList.add('opacity-100');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling background
+            };
+
+            const hideModal = () => {
+                modal.classList.remove('opacity-100');
+                modal.classList.add('opacity-0');
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                    modalImg.src = '';
+                    document.body.style.overflow = '';
+                }, 300);
+            };
+
+            lightboxImages.forEach(img => {
+                img.addEventListener('click', () => openModal(img.src));
+            });
+
+            closeModal.addEventListener('click', hideModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) hideModal();
+            });
+        });
+    </script>
+</body>
+</html>
